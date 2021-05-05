@@ -1,5 +1,5 @@
 class Player{
-  constructor(x, y, speed, bulletsCount, size, repeateShotTime, bulletsReloadTime, headSize, bulletSpeed){
+  constructor(x, y, speed, bulletsCount, size, repeateShotTime, bulletsReloadTime, headSize, bulletSpeed, lives){
     this.x = x;
     this.y = y;
     this.repeateShotTime = repeateShotTime;
@@ -11,6 +11,7 @@ class Player{
     this.size = size;
     this.headSize = headSize;
     this.bulletSpeed = bulletSpeed;
+    this.lives = lives;
   }
 
   draw(){
