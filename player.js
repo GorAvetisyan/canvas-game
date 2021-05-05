@@ -116,4 +116,12 @@ class Player{
     }
   
   }
+  minusLive(){
+    if(this.lives > 1){
+      this.lives--;
+      playerLivesUI.innerHTML = this.lives;
+    }else{
+      game.over();
+    }
+  }
 }

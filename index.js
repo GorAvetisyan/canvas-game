@@ -55,9 +55,17 @@ const game = {
 
 
     game.monstersArray.forEach(item => {
+      if(item.isCollision(game.player)){
+        game.player.minusLive();
+        item.delete();
+      }
       item.update();
       item.checkForCollisionWithBullet();
     })
+  },
+
+  over : () => {
+    alert('Game over');
   }
 
 }
