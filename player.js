@@ -80,7 +80,7 @@ class Player{
       }
 
       console.log(dy, dx);
-      const bullet = new Bullet(this.x + 45, this.y + 45, dx, dy);
+      const bullet = new Bullet(this.x + (this.size - game.bulletSize) / 2, this.y + (this.size - game.bulletSize) / 2, dx, dy, game.bulletSize);
       game.bulletsArray.push(bullet);
       this.lastBulletShotTime = new Date().valueOf();
       this.bulletsCount--;

@@ -1,16 +1,16 @@
 class Bullet{
-  constructor(x, y, dx, dy){
+  constructor(x, y, dx, dy, size){
     this.x = x;
     this.y = y;
     this.dx = dx;
     this.dy = dy;
-
+    this.size = size;
   }
 
 
   draw(){
     ctx.fillStyle = 'black';
-    ctx.fillRect(this.x, this.y, 10, 10);
+    ctx.fillRect(this.x, this.y, this.size, this.size);
     
   }
 
