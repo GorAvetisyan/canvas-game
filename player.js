@@ -5,6 +5,7 @@ class Player{
     this.repeateShotTime = repeateShotTime;
     this.bulletsCount = bulletsCount;
     this.lastBulletShotTime = 0;
+    this.speedEffect = {value : 1, duration : 0};
     this.speed = speed;
     this.bulletsReloadTime = bulletsReloadTime;
     this.lookWay = 'Right'; //Show which direction player is looking on
@@ -44,6 +45,12 @@ class Player{
       }
   }
   update(){
+    if((new Date().valueOf() - this.speedEffect.start) / 1000 >= this.speedEffect.duration && this.speedEffect.duration){
+      console.log(this.speed, this.speedEffect.value)
+      this.speedEffect.duration = 0;
+      this.speed = this.speed / this.speedEffect.value;
+    }
+
     if(this.isMoving){
       switch(this.lookWay){
         case 'Up': this.y - this.headSize - this.speed > 0 ? this.y += -this.speed : ''; break;
@@ -122,6 +129,20 @@ class Player{
       playerLivesUI.innerHTML = this.lives;
     }else{
       game.over();
+    }
+  }
+  plusLive(){
+    this.lives++;
+    playerLivesUI.innerHTML = this.lives;
+  }
+  plusSpeed(duration, value){
+    if(!this.speedEffect.duration){
+      this.speed *= value;
+      this.speedEffect.start = new Date().valueOf();
+      this.speedEffect.duration = duration;
+      this.speedEffect.value = value;
+    }else{
+      this.speedEffect.start = new Date().valueOf();
     }
   }
 }

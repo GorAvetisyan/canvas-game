@@ -4,6 +4,21 @@ const ctx = canvas.getContext('2d');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
+const boosterTypes = [
+  {
+    type : 'life',
+    color: 'green'
+  },
+  {
+    type : 'speed',
+    color : 'yellow'
+  },
+  {
+    type : 'super-shot',
+    color : 'orange'
+  }
+]
+
 
 document.addEventListener('keydown', ({key, type}) => game.player.handleKeyInput(key, type));
 document.addEventListener('keyup', ({key, type}) => game.player.handleKeyInput(key, type));
@@ -11,6 +26,10 @@ document.addEventListener('keyup', ({key, type}) => game.player.handleKeyInput(k
 const game = {
   bulletsArray : [],
   monstersArray : [],
+  boostersArray : [],
+  boosterTime : 3,
+  boosterSize : 30,
+  lastBoosterTime : -1,
   maxMonsterCount : 10,
   monsterMaxRoad : 1000,
   score : 0,
@@ -19,12 +38,45 @@ const game = {
   bullets : [],
 
   start: () => {
+    // game.boostersArray.push(new LifeBooster(200, 200, 100, 'red', 1, new Date().valueOf()));    
     game.animate();
   },
 
   animate: () => {
+    
+    
     ctx.clearRect(0, 0, innerWidth, innerHeight);
     requestAnimationFrame(game.animate);
+    
+
+    if(game.lastBoosterTime === -1 || (new Date().valueOf() - game.lastBoosterTime) / 1000 >= game.boosterTime ){
+      const x = randomNumber(0, innerWidth);
+      const y = randomNumber(0, innerHeight);
+      const typeIndex = Math.round(randomNumber(0, boosterTypes.length - 1));
+      const {color, type} = boosterTypes[typeIndex];
+      let booster;
+      switch (type){
+        case 'life':
+          booster = new LifeBooster(x, y, game.boosterSize, color, new Date().valueOf(), type);
+          break;
+        case 'speed':
+          booster = new SpeedBooster(x, y, game.boosterSize, color, new Date().valueOf(), type, 5, 2);
+          break;
+        case 'super-shot':
+          booster = new SuperShotBooster(x, y, game.boosterSize, color, new Date().valueOf(), type);
+          break;
+      }
+      game.lastBoosterTime = new Date().valueOf();
+      game.boostersArray.push(booster);
+    }
+
+    game.boostersArray.forEach(item => {
+      if(isCollision(item, game.player)){
+        item.eatenByUser();
+      }
+      item.draw();
+    });
+
     game.bulletsArray.forEach(item => item.update());
     
     
