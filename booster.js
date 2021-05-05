@@ -41,6 +41,15 @@ class SpeedBooster extends Booster{
 }
 
 class SuperShotBooster extends Booster{
+  constructor(x, y, size, color, timestamp, type, duration, bulletSize){
+    super(x, y, size, color, timestamp, type);
+    this.duration = duration;
+    this.bulletSize = bulletSize;
+  }
 
+  eatenByUser(){
+    super.eatenByUser();
+    game.player.superShot(this.duration, this.bulletSize);
+  }
 }
 

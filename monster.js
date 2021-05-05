@@ -48,7 +48,9 @@ class Monster{
 
       // }
       if(this.isCollision(item)){
-        item.delete();
+        if(!item.isSuperShot){
+          item.delete();
+        }
         this.delete();
         game.score++;
         game.maxMonsterCount++;

@@ -6,6 +6,7 @@ class Player{
     this.bulletsCount = bulletsCount;
     this.lastBulletShotTime = 0;
     this.speedEffect = {value : 1, duration : 0};
+    this.superShotEffect = {bulletSize : 30, duration : 0};
     this.speed = speed;
     this.bulletsReloadTime = bulletsReloadTime;
     this.lookWay = 'Right'; //Show which direction player is looking on
@@ -46,9 +47,12 @@ class Player{
   }
   update(){
     if((new Date().valueOf() - this.speedEffect.start) / 1000 >= this.speedEffect.duration && this.speedEffect.duration){
-      console.log(this.speed, this.speedEffect.value)
       this.speedEffect.duration = 0;
       this.speed = this.speed / this.speedEffect.value;
+    }
+    if((new Date().valueOf() - this.superShotEffect.start) / 1000 >= this.superShotEffect.duration && this.superShotEffect.duration){
+      this.superShotEffect.duration = 0;
+     
     }
 
     if(this.isMoving){
@@ -90,7 +94,13 @@ class Player{
       }
 
       console.log(dy, dx);
-      const bullet = new Bullet(this.x + (this.size - game.bulletSize) / 2, this.y + (this.size - game.bulletSize) / 2, dx, dy, game.bulletSize);
+      let bullet;
+      if(this.superShotEffect.duration){
+        bullet = new Bullet(this.x + (this.size - this.superShotEffect.bulletSize) / 2, this.y + (this.size - this.superShotEffect.bulletSize) / 2, dx, dy, this.superShotEffect.bulletSize, true);
+        
+      }else{
+        bullet = new Bullet(this.x + (this.size - game.bulletSize) / 2, this.y + (this.size - game.bulletSize) / 2, dx, dy, game.bulletSize, false);
+      }
       game.bulletsArray.push(bullet);
       this.lastBulletShotTime = new Date().valueOf();
       this.bulletsCount--;
@@ -143,6 +153,15 @@ class Player{
       this.speedEffect.value = value;
     }else{
       this.speedEffect.start = new Date().valueOf();
+    }
+  }
+  superShot(duration, bulletSize){
+    if(!this.superShotEffect.duration){
+      this.superShotEffect.duration = duration;
+      this.superShotEffect.bulletSize = bulletSize;
+      this.superShotEffect.start = new Date().valueOf();
+    }else{
+      this.superShotEffect.start = new Date().valueOf();
     }
   }
 }

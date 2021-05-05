@@ -63,7 +63,7 @@ const game = {
           booster = new SpeedBooster(x, y, game.boosterSize, color, new Date().valueOf(), type, 5, 2);
           break;
         case 'super-shot':
-          booster = new SuperShotBooster(x, y, game.boosterSize, color, new Date().valueOf(), type);
+          booster = new SuperShotBooster(x, y, game.boosterSize, color, new Date().valueOf(), type, 5, 30);
           break;
       }
       game.lastBoosterTime = new Date().valueOf();

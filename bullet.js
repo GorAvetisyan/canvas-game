@@ -1,15 +1,22 @@
 class Bullet{
-  constructor(x, y, dx, dy, size){
+  constructor(x, y, dx, dy, size, isSuperShot){
     this.x = x;
     this.y = y;
     this.dx = dx;
     this.dy = dy;
     this.size = size;
+    this.isSuperShot = isSuperShot;
   }
 
 
   draw(){
-    ctx.fillStyle = 'black';
+    console.log(this.isSuperShot);
+    if(this.isSuperShot){
+      ctx.fillStyle = 'orange';
+    }else{
+
+      ctx.fillStyle = 'black';
+    }
     ctx.fillRect(this.x, this.y, this.size, this.size);
     
   }
