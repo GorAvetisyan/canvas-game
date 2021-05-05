@@ -12,6 +12,7 @@ const game = {
   bulletsArray : [],
   monstersArray : [],
   maxMonsterCount : 10,
+  monsterMaxRoad : 1000,
   score : 0,
   bulletSize : 10,
   player : new Player(0, 0, 10, 50, 100, 0.1, 5, 20, 20, 3),
@@ -46,7 +47,7 @@ const game = {
       }
       const dx = randomNumber(-3, 3);
       const dy = randomNumber(-3, 3);
-      const maxRoad = randomNumber(0, 300);
+      const maxRoad = randomNumber(0, game.monsterMaxRoad);
       const monster = new Monster(x, y, 50, dx, dy, maxRoad);
       game.monstersArray.push(monster);
       

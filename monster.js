@@ -51,6 +51,7 @@ class Monster{
         item.delete();
         this.delete();
         game.score++;
+        game.maxMonsterCount++;
         scoreUI.innerHTML = game.score;
       }
     }) 
