@@ -1,5 +1,5 @@
 class Player{
-  constructor(x, y, speed, bulletsCount, size, repeateShotTime, bulletsReloadTime){
+  constructor(x, y, speed, bulletsCount, size, repeateShotTime, bulletsReloadTime, headSize){
     this.x = x;
     this.y = y;
     this.repeateShotTime = repeateShotTime;
@@ -9,6 +9,7 @@ class Player{
     this.bulletsReloadTime = bulletsReloadTime;
     this.lookWay = 'Right'; //Show which direction player is looking on
     this.size = size;
+    this.headSize = headSize;
   }
 
   draw(){
@@ -17,19 +18,19 @@ class Player{
     switch(this.lookWay){
       case 'Up':
         ctx.fillStyle = 'red';
-        ctx.fillRect(this.x, this.y -10, this.size, 10);
+        ctx.fillRect(this.x, this.y -this.headSize, this.size, this.headSize);
         break;
       case 'Right':
         ctx.fillStyle = 'red';
-        ctx.fillRect(this.x + this.size, this.y, 10, this.size);
+        ctx.fillRect(this.x + this.size, this.y, this.headSize, this.size);
         break;
       case 'Down':
         ctx.fillStyle = 'red';
-        ctx.fillRect(this.x, this.y + this.size, this.size, 10);
+        ctx.fillRect(this.x, this.y + this.size, this.size, this.headSize);
         break;
       case 'Left':
         ctx.fillStyle = 'red';
-        ctx.fillRect(this.x - 10, this.y, 10, this.size);
+        ctx.fillRect(this.x - this.headSize, this.y, this.headSize, this.size);
         break;
     }
   }
@@ -43,8 +44,8 @@ class Player{
   update(){
     if(this.isMoving){
       switch(this.lookWay){
-        case 'Up': this.y - this.speed > 0 ? this.y += -this.speed : ''; break;
-        case 'Right': this.x + this.speed + this.size < innerWidth ? this.x += this.speed : ''; break;
+        case 'Up': this.y - this.headSize - this.speed > 0 ? this.y += -this.speed : ''; break;
+        case 'Right': this.x + this.headSize + this.speed + this.size < innerWidth ? this.x += this.speed : ''; break;
         case 'Down': this.y + this.speed + this.size < innerHeight ? this.y += this.speed : ''; break;
         case 'Left': this.x - this.speed > 0 ? this.x += -this.speed : ''; break;
       }
