@@ -14,7 +14,7 @@ const game = {
   maxMonsterCount : 10,
   score : 0,
   bulletSize : 10,
-  player : new Player(0, 0, 10, 50, 100, 0.1, 5, 20),
+  player : new Player(0, 0, 10, 50, 100, 0.1, 5, 20, 20),
   bullets : [],
 
   start: () => {

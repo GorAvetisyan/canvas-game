@@ -1,5 +1,5 @@
 class Player{
-  constructor(x, y, speed, bulletsCount, size, repeateShotTime, bulletsReloadTime, headSize){
+  constructor(x, y, speed, bulletsCount, size, repeateShotTime, bulletsReloadTime, headSize, bulletSpeed){
     this.x = x;
     this.y = y;
     this.repeateShotTime = repeateShotTime;
@@ -10,6 +10,7 @@ class Player{
     this.lookWay = 'Right'; //Show which direction player is looking on
     this.size = size;
     this.headSize = headSize;
+    this.bulletSpeed = bulletSpeed;
   }
 
   draw(){
@@ -74,10 +75,10 @@ class Player{
       let dx; 
       let dy;
       switch(this.lookWay){
-        case 'Up': dy = -this.speed; break;
-        case 'Right': dx = this.speed; break;
-        case 'Down': dy = this.speed; break;
-        case 'Left': dx = -this.speed; break;
+        case 'Up': dy = -this.bulletSpeed; break;
+        case 'Right': dx = this.bulletSpeed; break;
+        case 'Down': dy = this.bulletSpeed; break;
+        case 'Left': dx = -this.bulletSpeed; break;
       }
 
       console.log(dy, dx);
