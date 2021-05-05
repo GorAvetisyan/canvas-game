@@ -11,7 +11,7 @@ document.addEventListener('keyup', ({key, type}) => game.player.handleKeyInput(k
 const game = {
   bulletsArray : [],
   monstersArray : [],
-  maxMonsterCount : 10,
+  maxMonsterCount : 30,
   score : 0,
   bulletSize : 10,
   player : new Player(0, 0, 10, 50, 100, 0.1, 5, 20, 20),
@@ -30,18 +30,23 @@ const game = {
     game.player.draw();
     game.player.update();
 
-    if(game.maxMonsterCount > game.monstersArray.length){
-      const x = randomNumber(0, innerWidth);
-      const y = randomNumber(0, innerHeight);
-      for (let i = 0; i < game.monstersArray; i++) {
-        if(i !== 0){
-          for (let j = 0; j < game.monstersArray; j++) {
-            game.monstersArray[i].checkForCollisionWithOtherMonster(game.monstersArray[j]) ? j = -1 : '';
-          }
+    for (let i = game.monstersArray.length; i < game.maxMonsterCount; i++) {
+      let x = randomNumber(0, innerWidth);
+      let y = randomNumber(0, innerHeight);
+      for (let j = 0; j < game.monstersArray.length; j++) {
+        if(game.monstersArray[j].isCollision(game.player)){
+          console.log('Is collision');
+          x = randomNumber(0, innerWidth);
+          y = randomNumber(0, innerHeight);
+          game.monstersArray[j].x = x;
+          game.monstersArray[j].x = y;
+          j = -1;
         }
+        
       }
       const monster = new Monster(x, y, 50);
       game.monstersArray.push(monster);
+      
     }
 
 
