@@ -11,7 +11,7 @@ document.addEventListener('keyup', ({key, type}) => game.player.handleKeyInput(k
 const game = {
   bulletsArray : [],
   monstersArray : [],
-  maxMonsterCount : 30,
+  maxMonsterCount : 10,
   score : 0,
   bulletSize : 10,
   player : new Player(0, 0, 10, 50, 100, 0.1, 5, 20, 20),
@@ -44,7 +44,10 @@ const game = {
         }
         
       }
-      const monster = new Monster(x, y, 50);
+      const dx = randomNumber(-3, 3);
+      const dy = randomNumber(-3, 3);
+      const maxRoad = randomNumber(0, 300);
+      const monster = new Monster(x, y, 50, dx, dy, maxRoad);
       game.monstersArray.push(monster);
       
     }
@@ -52,7 +55,7 @@ const game = {
 
 
     game.monstersArray.forEach(item => {
-      item.draw();
+      item.update();
       item.checkForCollisionWithBullet();
     })
   }

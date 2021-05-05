@@ -6,6 +6,28 @@ class Monster{
     this.dx = dx;
     this.dy = dy;
     this.maxRoad = maxRoad;
+    this.roadX = maxRoad;
+    this.roadY = maxRoad;
+  }
+
+  update(){
+    if(this.roadX >= 0){
+      this.x += this.dx;
+      this.roadX -= Math.abs(this.dx);
+    }else{
+      this.roadX = this.maxRoad;
+      this.dx = -this.dx;
+    }
+
+    if(this.roadY >= 0){
+      this.y += this.dy;
+      this.roadY -= Math.abs(this.dy);
+    }else{
+      this.roadY = this.maxRoad;
+      this.dy = -this.dy;
+    }
+
+    this.draw();
   }
 
   draw(){
@@ -42,7 +64,6 @@ class Monster{
 
   isCollision(rect2){
     const rect1 = this;
-    console.log(rect1, rect2)
     if (rect1.x < rect2.x + rect2.size &&
       rect1.x + rect1.size > rect2.x &&
       rect1.y < rect2.y + rect2.size &&
