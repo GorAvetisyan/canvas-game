@@ -5,6 +5,7 @@ const alertsUI = document.getElementById('alerts');
 const reloadingBulletsUI = document.getElementById('reloading-bullets');
 const reloadingBulletsProgressUI = document.getElementById('reloading-bullets-progress');
 const playerLivesUI = document.getElementById('player-lives');
+const hurtUI = document.getElementById('hurt');
 
 
 bulletProgressUI.max = game.player.repeateShotTime;

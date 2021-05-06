@@ -136,6 +136,10 @@ class Player{
   minusLive(){
     if(this.lives > 1){
       this.lives--;
+      hurtUI.style.display = 'block'
+      setInterval(() => {
+        hurtUI.style.display = 'none'
+      }, 100)
       playerLivesUI.innerHTML = this.lives;
     }else{
       game.over();
