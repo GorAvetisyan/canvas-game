@@ -30,6 +30,7 @@ const game = {
   boosterTime : 3,
   boosterSize : 30,
   lastBoosterTime : -1,
+  boosterLiveTime : 10,
   maxMonsterCount : 10,
   monsterMaxRoad : 1000,
   score : 0,
@@ -63,7 +64,7 @@ const game = {
           booster = new SpeedBooster(x, y, game.boosterSize, color, new Date().valueOf(), type, 5, 2);
           break;
         case 'super-shot':
-          booster = new SuperShotBooster(x, y, game.boosterSize, color, new Date().valueOf(), type, 5, 30);
+          booster = new SuperShotBooster(x, y, game.boosterSize, color, new Date().valueOf(), type, 5, 100);
           break;
       }
       game.lastBoosterTime = new Date().valueOf();
@@ -71,6 +72,9 @@ const game = {
     }
 
     game.boostersArray.forEach(item => {
+      if((new Date().valueOf() - item.timestamp) / 1000 >= game.boosterLiveTime){
+        item.delete();
+      }
       if(isCollision(item, game.player)){
         item.eatenByUser();
       }

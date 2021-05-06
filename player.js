@@ -6,7 +6,7 @@ class Player{
     this.bulletsCount = bulletsCount;
     this.lastBulletShotTime = 0;
     this.speedEffect = {value : 1, duration : 0};
-    this.superShotEffect = {bulletSize : 30, duration : 0};
+    this.superShotEffect = {bulletSize : 70, duration : 0};
     this.speed = speed;
     this.bulletsReloadTime = bulletsReloadTime;
     this.lookWay = 'Right'; //Show which direction player is looking on
