@@ -125,7 +125,7 @@ class Player{
       this.move(key);
       this.shot(key);
     }
-    if(type === 'keyup' && key.includes('Arrow')){
+    if(type === 'keyup' && key.includes('Arrow') && key.split('Arrow')[1] === this.lookWay){ 
       this.isMoving = false;
     }
     if(key === 'r'){
